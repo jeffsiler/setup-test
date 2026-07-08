@@ -17,6 +17,8 @@ public partial class SettingsWindow : Window
         PollIntervalBox.Text = settings.PollIntervalSeconds.ToString();
         RetentionDaysBox.Text = settings.RetentionDays.ToString();
         StartWithWindowsBox.IsChecked = settings.StartWithWindows;
+        ShowMainWindowOnStartupBox.IsChecked = settings.ShowMainWindowOnStartup;
+        MinimizeToTrayOnCloseBox.IsChecked = settings.MinimizeToTrayOnClose;
     }
 
     private void SaveButton_Click(object sender, RoutedEventArgs e)
@@ -38,6 +40,8 @@ public partial class SettingsWindow : Window
             PollIntervalSeconds = pollInterval,
             RetentionDays = retentionDays,
             StartWithWindows = StartWithWindowsBox.IsChecked == true,
+            ShowMainWindowOnStartup = ShowMainWindowOnStartupBox.IsChecked == true,
+            MinimizeToTrayOnClose = MinimizeToTrayOnCloseBox.IsChecked == true,
         };
 
         _monitoringService.ApplySettings(settings);

@@ -52,18 +52,25 @@ public sealed class TrayApplicationHost : IDisposable
         UpdateTrayText(_monitoringService.LatestSnapshot);
         BuildContextMenu();
 
-        _notifyIcon.ShowBalloonTip(
-            5000,
-            "Trimble Battery Monitor",
-            "Running in the system tray. Click the ^ arrow near the clock if you do not see the icon.",
-            ToolTipIcon.Info);
-        AppLogger.Info("Startup notification shown.");
+        if (settings.ShowMainWindowOnStartup)
+        {
+            ShowStatusWindow();
+            AppLogger.Info("Main window shown on startup.");
+        }
+        else
+        {
+            _notifyIcon.ShowBalloonTip(
+                5000,
+                "Trimble Battery Monitor",
+                "Running in the background. Double-click the tray icon or use Start Menu to open the window.",
+                ToolTipIcon.Info);
+        }
     }
 
     private void BuildContextMenu()
     {
         var menu = new ContextMenuStrip();
-        menu.Items.Add("Open", null, (_, _) => ShowStatusWindow());
+        menu.Items.Add("Open Window", null, (_, _) => ShowStatusWindow());
         menu.Items.Add("Settings", null, (_, _) => ShowSettingsWindow());
         menu.Items.Add(new ToolStripSeparator());
         menu.Items.Add("Exit", null, (_, _) => ExitApplication());
@@ -74,12 +81,17 @@ public sealed class TrayApplicationHost : IDisposable
     {
         if (_statusWindow is { IsLoaded: true })
         {
+            _statusWindow.Show();
+            _statusWindow.WindowState = WindowState.Normal;
             _statusWindow.Activate();
             _statusWindow.Focus();
             return;
         }
 
-        _statusWindow = new StatusWindow(_monitoringService);
+        _statusWindow = new StatusWindow(
+            _monitoringService,
+            onMinimizeToTray: () => AppLogger.Info("Main window minimized to tray."),
+            onExit: ExitApplication);
         _statusWindow.Closed += (_, _) => _statusWindow = null;
         _statusWindow.Show();
         _statusWindow.Activate();
@@ -104,7 +116,7 @@ public sealed class TrayApplicationHost : IDisposable
     {
         if (Application.Current?.Dispatcher is { } dispatcher && !dispatcher.CheckAccess())
         {
-            dispatcher.Invoke(() => UpdateTrayText(snapshot));
+            dispatcher.Invoke(() => OnSnapshotUpdated(snapshot));
             return;
         }
 

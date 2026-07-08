@@ -71,9 +71,10 @@ If v1.0.0 or v1.0.1 was installed previously, uninstall it first from **Settings
 
 After install:
 
-1. The app starts automatically and appears in the system tray.
-2. Double-click the tray icon (or right-click → **Open**) to view status and history.
-3. Right-click → **Settings** to change poll interval, retention, or auto-start.
+1. The **main window opens automatically** with battery status, a charge chart, and history table.
+2. Closing the window minimizes to the tray by default (monitoring continues in the background).
+3. Re-open from the **desktop shortcut**, **Start Menu**, or tray icon (**Open Window**).
+4. Use **File → Settings** to change poll interval, retention, or window behavior.
 
 ## SmartScreen Notice
 

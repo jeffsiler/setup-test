@@ -8,7 +8,7 @@ namespace TrimbleBatteryMonitor.Views;
 
 public partial class BatteryChartControl : UserControl
 {
-    private static readonly Brush[] SeriesBrushes =
+    private static readonly System.Windows.Media.Brush[] SeriesBrushes =
     [
         new SolidColorBrush(Color.FromRgb(0, 99, 163)),
         new SolidColorBrush(Color.FromRgb(46, 125, 50)),

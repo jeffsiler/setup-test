@@ -1,0 +1,22 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net8.0-windows</TargetFramework>
+    <UseWPF>true</UseWPF>
+    <UseWindowsForms>true</UseWindowsForms>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <RootNamespace>TrimbleBatteryMonitor</RootNamespace>
+    <AssemblyName>TrimbleBatteryMonitor</AssemblyName>
+    <Version>1.0.0</Version>
+    <Company>Trimble Battery Monitor</Company>
+    <Product>Trimble Battery Monitor</Product>
+    <Description>Background battery monitor for Trimble T110 tablets</Description>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\TrimbleBatteryMonitor.Core\TrimbleBatteryMonitor.Core.csproj" />
+  </ItemGroup>
+
+</Project>

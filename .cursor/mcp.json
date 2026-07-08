@@ -1,0 +1,9 @@
+{
+  "mcpServers": {
+    "domo": {
+      "command": "npx",
+      "args": ["-y", "@tylershep/domo-mcp"],
+      "envFile": "${workspaceFolder}/.env"
+    }
+  }
+}

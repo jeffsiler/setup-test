@@ -1,0 +1,52 @@
+<Window x:Class="TrimbleBatteryMonitor.Views.SettingsWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Settings"
+        Height="340"
+        Width="420"
+        ResizeMode="NoResize"
+        WindowStartupLocation="CenterScreen"
+        Background="{StaticResource BackgroundBrush}">
+    <Grid Margin="20">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <TextBlock Grid.Row="0"
+                   Text="Polling interval (seconds)"
+                   Margin="0,0,0,6"/>
+        <TextBox x:Name="PollIntervalBox"
+                 Grid.Row="1"
+                 Margin="0,0,0,16"/>
+
+        <TextBlock Grid.Row="2"
+                   Text="Data retention (days)"
+                   Margin="0,0,0,6"/>
+        <TextBox x:Name="RetentionDaysBox"
+                 Grid.Row="3"
+                 Margin="0,0,0,16"/>
+
+        <CheckBox x:Name="StartWithWindowsBox"
+                  Grid.Row="4"
+                  Content="Start with Windows"
+                  Margin="0,0,0,16"/>
+
+        <StackPanel Grid.Row="6"
+                    Orientation="Horizontal"
+                    HorizontalAlignment="Right">
+            <Button Content="Save"
+                    Width="90"
+                    Margin="0,0,8,0"
+                    Click="SaveButton_Click"/>
+            <Button Content="Cancel"
+                    Width="90"
+                    Click="CancelButton_Click"/>
+        </StackPanel>
+    </Grid>
+</Window>

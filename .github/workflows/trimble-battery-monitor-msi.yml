@@ -1,0 +1,45 @@
+name: Build Trimble Battery Monitor MSI
+
+on:
+  push:
+    paths:
+      - 'trimble-battery-monitor/**'
+      - '.github/workflows/trimble-battery-monitor-msi.yml'
+  pull_request:
+    paths:
+      - 'trimble-battery-monitor/**'
+  workflow_dispatch:
+
+defaults:
+  run:
+    working-directory: trimble-battery-monitor
+
+jobs:
+  build:
+    runs-on: windows-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '8.0.x'
+
+      - name: Restore and build
+        run: dotnet build TrimbleBatteryMonitor.sln -c Release
+
+      - name: Install WiX Toolset
+        run: dotnet tool install --global wix --version 5.0.2
+
+      - name: Build MSI
+        shell: pwsh
+        run: ./installer/build-msi.ps1 -Configuration Release -Runtime win-x64 -OutputDir dist
+
+      - name: Upload MSI artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: TrimbleBatteryMonitor-msi
+          path: trimble-battery-monitor/dist/TrimbleBatteryMonitor.msi
+          if-no-files-found: error

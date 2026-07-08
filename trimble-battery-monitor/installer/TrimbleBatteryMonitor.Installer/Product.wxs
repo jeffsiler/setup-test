@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Wix xmlns="http://wixtoolset.org/schemas/v4/wxs">
 
-  <?define ProductVersion="1.1.0.0" ?>
+  <?define ProductVersion="1.1.1.0" ?>
   <?define UpgradeCode="C8F4E2A1-9B3D-4E5F-A6C7-8D9E0F1A2B3C" ?>
 
   <Package Name="Trimble Battery Monitor"

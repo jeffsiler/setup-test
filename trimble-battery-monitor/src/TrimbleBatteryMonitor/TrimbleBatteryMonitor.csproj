@@ -9,7 +9,7 @@
     <Nullable>enable</Nullable>
     <RootNamespace>TrimbleBatteryMonitor</RootNamespace>
     <AssemblyName>TrimbleBatteryMonitor</AssemblyName>
-    <Version>1.1.0</Version>
+    <Version>1.1.1</Version>
     <Company>Trimble Battery Monitor</Company>
     <Product>Trimble Battery Monitor</Product>
     <Description>Background battery monitor for Trimble T110 tablets</Description>

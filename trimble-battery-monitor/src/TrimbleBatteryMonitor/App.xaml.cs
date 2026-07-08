@@ -3,7 +3,7 @@ using TrimbleBatteryMonitor.Services;
 
 namespace TrimbleBatteryMonitor;
 
-public partial class App : Application
+public partial class App : System.Windows.Application
 {
     private TrayApplicationHost? _trayHost;
 

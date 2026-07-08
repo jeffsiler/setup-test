@@ -19,4 +19,8 @@
     <ProjectReference Include="..\TrimbleBatteryMonitor.Core\TrimbleBatteryMonitor.Core.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Using Remove="System.Windows.Forms" />
+  </ItemGroup>
+
 </Project>

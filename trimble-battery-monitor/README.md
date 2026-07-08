@@ -45,7 +45,8 @@ History in AppData is preserved across reinstalls.
 2. Open **Actions** → **Build Trimble Battery Monitor MSI** → run workflow (or wait for a push to `trimble-battery-monitor/`).
 3. Download the **TrimbleBatteryMonitor-msi** artifact.
 4. Copy `TrimbleBatteryMonitor.msi` to the T110 tablet.
-5. Double-click the MSI and follow the installer.
+5. Double-click the MSI and follow the installer (**accept the UAC admin prompt** — required for v1.0.2+).
+6. After install, look for a **desktop shortcut** and a **Start Menu** entry.
 
 ### Option B: Build on a Windows machine
 
@@ -56,6 +57,15 @@ dotnet tool install --global wix
 ```
 
 Output: `trimble-battery-monitor\dist\TrimbleBatteryMonitor.msi`
+
+## Verify installation on the T110
+
+1. **Settings → Apps → Installed apps** — search for **Trimble Battery Monitor**
+2. **File Explorer** — open `C:\Program Files\Trimble Battery Monitor\` and confirm `TrimbleBatteryMonitor.exe` exists
+3. **Task Manager** — look for `TrimbleBatteryMonitor.exe` after install (it launches automatically)
+4. **System tray** — click the **^** arrow near the clock to find the icon
+
+If v1.0.0 or v1.0.1 was installed previously, uninstall it first from **Settings → Apps**, then install v1.0.2.
 
 ## First Run
 

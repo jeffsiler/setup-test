@@ -42,8 +42,7 @@
         <CheckBox x:Name="MinimizeToTrayOnCloseBox"
                   Grid.Row="5"
                   Content="Minimize to tray when closing the window (keeps monitoring in background)"
-                  Margin="0,0,0,10"
-                  TextWrapping="Wrap"/>
+                  Margin="0,0,0,10"/>
 
         <CheckBox x:Name="StartWithWindowsBox"
                   Grid.Row="6"

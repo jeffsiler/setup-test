@@ -11,16 +11,26 @@ namespace TrimbleBatteryMonitor.Services;
 
 public sealed class TrayApplicationHost : IDisposable
 {
+    private static readonly Mutex SingleInstanceMutex = new(false, "TrimbleBatteryMonitor.SingleInstance");
+
     private readonly BatteryMonitoringService _monitoringService = new();
     private readonly NotifyIcon _notifyIcon;
     private StatusWindow? _statusWindow;
     private SettingsWindow? _settingsWindow;
+    private readonly bool _ownsMutex;
 
     public TrayApplicationHost()
     {
+        _ownsMutex = SingleInstanceMutex.WaitOne(0, false);
+        if (!_ownsMutex)
+        {
+            AppLogger.Info("Another instance is already running.");
+            throw new InvalidOperationException("Trimble Battery Monitor is already running.");
+        }
+
         _notifyIcon = new NotifyIcon
         {
-            Icon = SystemIcons.Information,
+            Icon = SystemIcons.Application,
             Text = "Trimble Battery Monitor",
             Visible = true,
         };
@@ -41,6 +51,13 @@ public sealed class TrayApplicationHost : IDisposable
         _monitoringService.Start();
         UpdateTrayText(_monitoringService.LatestSnapshot);
         BuildContextMenu();
+
+        _notifyIcon.ShowBalloonTip(
+            5000,
+            "Trimble Battery Monitor",
+            "Running in the system tray. Click the ^ arrow near the clock if you do not see the icon.",
+            ToolTipIcon.Info);
+        AppLogger.Info("Startup notification shown.");
     }
 
     private void BuildContextMenu()
@@ -129,5 +146,10 @@ public sealed class TrayApplicationHost : IDisposable
         _monitoringService.Dispose();
         _notifyIcon.Visible = false;
         _notifyIcon.Dispose();
+
+        if (_ownsMutex)
+        {
+            SingleInstanceMutex.ReleaseMutex();
+        }
     }
 }

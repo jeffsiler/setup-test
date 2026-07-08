@@ -1,5 +1,6 @@
 using System.Runtime.InteropServices;
 using System.Management;
+using TrimbleBatteryMonitor.Core.Configuration;
 using TrimbleBatteryMonitor.Core.Models;
 
 namespace TrimbleBatteryMonitor.Core;
@@ -101,13 +102,17 @@ public sealed class BatteryCollector
                 }
             }
         }
-        catch (ManagementException)
+        catch (ManagementException ex)
         {
-            // WMI may be unavailable in non-Windows environments or restricted contexts.
+            AppLogger.Error("WMI battery query failed", ex);
         }
         catch (PlatformNotSupportedException)
         {
             // Expected when running outside Windows.
+        }
+        catch (Exception ex)
+        {
+            AppLogger.Error("Unexpected battery collection failure", ex);
         }
 
         return samples;

@@ -53,18 +53,25 @@ public sealed class BatteryMonitoringService : IDisposable
 
     private void Poll()
     {
-        var snapshot = _collector.Collect();
-        _latestSnapshot = snapshot;
-
-        if (snapshot.Batteries.Count > 0)
+        try
         {
-            _dataStore.InsertSamples(snapshot.Batteries);
+            var snapshot = _collector.Collect();
+            _latestSnapshot = snapshot;
+
+            if (snapshot.Batteries.Count > 0)
+            {
+                _dataStore.InsertSamples(snapshot.Batteries);
+            }
+
+            var purgeCutoff = DateTime.UtcNow.AddDays(-Math.Max(1, _settings.RetentionDays));
+            _dataStore.PurgeOlderThan(purgeCutoff);
+
+            SnapshotUpdated?.Invoke(snapshot);
         }
-
-        var purgeCutoff = DateTime.UtcNow.AddDays(-Math.Max(1, _settings.RetentionDays));
-        _dataStore.PurgeOlderThan(purgeCutoff);
-
-        SnapshotUpdated?.Invoke(snapshot);
+        catch (Exception ex)
+        {
+            AppLogger.Error("Battery polling failed", ex);
+        }
     }
 
     public void Dispose()

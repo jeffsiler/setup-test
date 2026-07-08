@@ -32,7 +32,8 @@ Each sample records:
 |------|------|
 | SQLite database | `%AppData%\TrimbleBatteryMonitor\data\battery.db` |
 | Settings | `%AppData%\TrimbleBatteryMonitor\appsettings.json` |
-| Install location | `%LocalAppData%\Programs\TrimbleBatteryMonitor\` |
+| Install location | `C:\Program Files\Trimble Battery Monitor\` |
+| Log file | `%AppData%\TrimbleBatteryMonitor\logs\app.log` |
 
 History in AppData is preserved across reinstalls.
 

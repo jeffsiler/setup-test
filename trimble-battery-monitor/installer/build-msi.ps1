@@ -6,7 +6,7 @@ param(
 
 $ErrorActionPreference = "Stop"
 
-$root = Split-Path -Parent (Split-Path -Parent $PSScriptRoot)
+$root = Split-Path -Parent $PSScriptRoot
 $solution = Join-Path $root "TrimbleBatteryMonitor.sln"
 $publishDir = Join-Path $root "publish"
 $installerDir = Join-Path $root "installer\TrimbleBatteryMonitor.Installer"

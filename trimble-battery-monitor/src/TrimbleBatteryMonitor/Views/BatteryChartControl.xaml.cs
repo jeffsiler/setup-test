@@ -5,6 +5,7 @@ using System.Windows.Shapes;
 using TrimbleBatteryMonitor.Core.Models;
 using Color = System.Windows.Media.Color;
 using Point = System.Windows.Point;
+using Brushes = System.Windows.Media.Brushes;
 
 namespace TrimbleBatteryMonitor.Views;
 

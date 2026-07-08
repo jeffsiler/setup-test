@@ -22,24 +22,18 @@ Scheduled trigger (daily, UTC cron)
    Email MCP — send digest to you
 ```
 
-## Step 1: Connect email MCP
+## Step 1: Connect Gmail
 
-Pick one email MCP and add it in **Cursor Settings → Tools & Integrations → MCP** (or your team dashboard for team automations).
+**→ See [gmail-setup.md](./gmail-setup.md) for full Gmail instructions.**
 
-| Option | Gmail | Outlook | Notes |
-|--------|-------|---------|-------|
-| [MailMCP](https://mailmcp.io/en/docs/cursor) | Yes | Yes | Hosted; read/search/send |
-| [@kembec/email-mcp](https://github.com/Kembec/email-mcp) | Yes | Yes | OAuth; `list_messages`, `search_messages`, `send_message` |
+Quick path (MailMCP + Gmail App Password):
 
-For cloud automations, prefer **HTTP/SSE MCP** over local stdio so OAuth tokens stay in Cursor's backend.
+1. Enable IMAP in Gmail settings
+2. Create a Google **App Password** (requires 2FA)
+3. Sign up at [mailmcp.io](https://mailmcp.io) and add your Gmail account
+4. Add the HTTP MCP URL to **Cursor Settings → Tools & Integrations → MCP** (use global `~/.cursor/mcp.json` for automations)
 
-OAuth callback URL for cloud agents:
-
-```
-https://www.cursor.com/agents/mcp/oauth/callback
-```
-
-Grant at least **read** access to inbox. Grant **send** if the agent will email you the digest (recommended).
+Alternative: [@kembec/email-mcp](https://github.com/Kembec/email-mcp) with Gmail OAuth (no app password).
 
 ## Step 2: Create the automation
 

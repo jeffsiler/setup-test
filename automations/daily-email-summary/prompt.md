@@ -9,7 +9,10 @@ Copy everything below the line into your Cursor Automation prompt. Replace the p
 - **Inbox account:** YOUR_EMAIL@example.com
 - **Digest recipient:** YOUR_EMAIL@example.com
 - **Your name:** YOUR_NAME
-- **Time window:** Messages received in the last 24 hours (or since the last successful run if Memories shows a prior timestamp)
+- **Email provider:** Gmail
+- **Gmail search query:** `newer_than:1d in:inbox -category:promotions -category:social`
+- **MCP account_id:** personal *(if using @kembec/email-mcp; omit for MailMCP)*
+- **Time window:** Messages matching the search above (or since the last successful run if Memories shows a prior timestamp)
 - **Send time context:** This digest is prepared at end of day to plan tomorrow
 
 ---
